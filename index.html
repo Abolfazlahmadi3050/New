@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>ابوالفضل احمدی |  مهندس نرم‌افزار</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       ROOT VARIABLES — CYBERPUNK THEME
+       ============================================================ */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cyber-black: #050505;
+      --cyber-dark: #0d0d0d;
+      --cyber-card: #111111;
+      --cyber-neon-blue: #00f0ff;
+      --cyber-neon-pink: #ff2d95;
+      --cyber-neon-purple: #b300ff;
+      --cyber-neon-green: #00ff88;
+      --cyber-gray: #888;
+      --cyber-light: #ccc;
+      --cyber-white: #f0f0f0;
+      --cyber-border: rgba(0, 240, 255, 0.08);
+      --cyber-border-glow: rgba(0, 240, 255, 0.15);
+      --cyber-shadow: 0 0 30px rgba(0, 240, 255, 0.05);
+      --cyber-radius: 12px;
+      --cyber-transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --cyber-font: 'Vazirmatn', 'Courier New', monospace;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: var(--cyber-font);
+      background: var(--cyber-black);
+      color: var(--cyber-white);
+      overflow-x: hidden;
+      direction: rtl;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+
+    /* ============================================================
+       CYBER GRID BACKGROUND
+       ============================================================ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 240, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.015) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(0, 240, 255, 0.02), transparent 60%),
+                  radial-gradient(ellipse at 70% 80%, rgba(255, 45, 149, 0.02), transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ============================================================
+       SCROLLBAR — CYBER STYLE
+       ============================================================ */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--cyber-black);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--cyber-neon-blue);
+      border-radius: 10px;
+      box-shadow: 0 0 15px var(--cyber-neon-blue);
+    }
+
+    /* ============================================================
+       UTILITY
+       ============================================================ */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ============================================================
+       GLOW ORBS — CYBERPUNK
+       ============================================================ */
+    .glow-orb {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(150px);
+      animation: orbFloat 25s ease-in-out infinite alternate;
+    }
+
+    .glow-orb--1 {
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.08), transparent 70%);
+      top: -20%;
+      right: -15%;
+      animation-duration: 30s;
+    }
+
+    .glow-orb--2 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 45, 149, 0.06), transparent 70%);
+      bottom: -20%;
+      left: -15%;
+      animation-duration: 28s;
+      animation-delay: -8s;
+    }
+
+    .glow-orb--3 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(179, 0, 255, 0.05), transparent 70%);
+      top: 40%;
+      left: 50%;
+      transform: translateX(-50%);
+      animation-duration: 32s;
+      animation-delay: -14s;
+    }
+
+    @keyframes orbFloat {
+      0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+      }
+      33% {
+        transform: translate(50px, -40px) scale(1.1) rotate(5deg);
+      }
+      66% {
+        transform: translate(-30px, 30px) scale(0.9) rotate(-3deg);
+      }
+      100% {
+        transform: translate(20px, -20px) scale(1.05) rotate(2deg);
+      }
+    }
+
+    /* ============================================================
+       NAV — CYBERPUNK
+       ============================================================ */
+    nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2.5rem;
+      backdrop-filter: blur(30px) saturate(1.2);
+      -webkit-backdrop-filter: blur(30px) saturate(1.2);
+      background: rgba(5, 5, 5, 0.8);
+      border-bottom: 1px solid var(--cyber-border);
+      transition: all var(--cyber-transition);
+    }
+
+    nav.scrolled {
+      background: rgba(5, 5, 5, 0.95);
+      border-bottom-color: var(--cyber-border-glow);
+      padding: 0.7rem 2.5rem;
+      box-shadow: 0 4px 40px rgba(0, 240, 255, 0.03);
+    }
+
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      color: var(--cyber-white);
+      text-decoration: none;
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+    }
+
+    .nav-logo span {
+      font-weight: 300;
+      color: var(--cyber-neon-blue);
+      text-shadow: 0 0 25px rgba(0, 240, 255, 0.2);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.4rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--cyber-gray);
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 400;
+      transition: all var(--cyber-transition);
+      letter-spacing: 0.12em;
+      position: relative;
+      text-transform: uppercase;
+    }
+
+    .nav-links a::before {
+      content: '[ ';
+      color: var(--cyber-neon-blue);
+      opacity: 0;
+      transition: opacity var(--cyber-transition);
+    }
+
+    .nav-links a::after {
+      content: ' ]';
+      color: var(--cyber-neon-blue);
+      opacity: 0;
+      transition: opacity var(--cyber-transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--cyber-white);
+      text-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+    }
+
+    .nav-links a:hover::before,
+    .nav-links a:hover::after {
+      opacity: 1;
+    }
+
+    .nav-links a.active {
+      color: var(--cyber-white);
+      text-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
+    }
+
+    .nav-links a.active::before,
+    .nav-links a.active::after {
+      opacity: 1;
+    }
+
+    /* Mobile Nav Toggle */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 26px;
+      height: 1.5px;
+      background: var(--cyber-white);
+      transition: all var(--cyber-transition);
+      border-radius: 2px;
+    }
+
+    .nav-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+      background: var(--cyber-neon-blue);
+    }
+    .nav-toggle.active span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .nav-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+      background: var(--cyber-neon-blue);
+    }
+
+    /* ============================================================
+       HERO — CYBERPUNK
+       ============================================================ */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 4rem;
+      padding: 8rem 0 4rem;
+      overflow: hidden;
+    }
+
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse at center, black 25%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 25%, transparent 75%);
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      color: var(--cyber-neon-blue);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+      text-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
+    }
+
+    .hero-eyebrow::before {
+      content: '//';
+      font-weight: 900;
+      color: var(--cyber-neon-pink);
+      text-shadow: 0 0 30px rgba(255, 45, 149, 0.2);
+    }
+
+    .hero-eyebrow::after {
+      content: '';
+      display: block;
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--cyber-neon-blue), transparent);
+    }
+
+    .hero-name {
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+
+    .hero-name .highlight {
+      display: block;
+      background: linear-gradient(135deg, var(--cyber-white), var(--cyber-neon-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 60px rgba(0, 240, 255, 0.1);
+    }
+
+    .hero-name .subtitle {
+      display: block;
+      font-size: 0.4em;
+      font-weight: 300;
+      color: var(--cyber-gray);
+      -webkit-text-fill-color: var(--cyber-gray);
+      letter-spacing: 0.12em;
+      margin-top: 0.4rem;
+      font-family: 'Courier New', monospace;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--cyber-gray);
+      line-height: 2;
+      max-width: 440px;
+      margin-bottom: 2.8rem;
+      font-weight: 300;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+
+    .hero-desc .glow-text {
+      color: var(--cyber-neon-blue);
+      text-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+
+    .btn-primary {
+      padding: 0.9rem 2.2rem;
+      background: transparent;
+      color: var(--cyber-neon-blue);
+      font-family: var(--cyber-font);
+      font-size: 0.8rem;
+      font-weight: 700;
+      border: 1px solid var(--cyber-neon-blue);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--cyber-transition);
+      letter-spacing: 0.08em;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.03);
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), transparent);
+      opacity: 0;
+      transition: opacity var(--cyber-transition);
+    }
+
+    .btn-primary:hover {
+      background: rgba(0, 240, 255, 0.05);
+      box-shadow: 0 0 50px rgba(0, 240, 255, 0.08), inset 0 0 30px rgba(0, 240, 255, 0.02);
+      transform: translateY(-3px);
+    }
+
+    .btn-primary:hover::before {
+      opacity: 1;
+    }
+
+    .btn-secondary {
+      padding: 0.9rem 2.2rem;
+      background: transparent;
+      color: var(--cyber-white);
+      font-family: var(--cyber-font);
+      font-size: 0.8rem;
+      font-weight: 400;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--cyber-transition);
+      letter-spacing: 0.08em;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--cyber-white);
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.02);
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.02);
+    }
+
+    /* ============================================================
+       HERO VISUAL — CYBER AVATAR
+       ============================================================ */
+    .hero-visual {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      animation: fadeIn 1s 1s forwards;
+    }
+
+    .avatar-frame {
+      position: relative;
+      width: 360px;
+      height: 440px;
+    }
+
+    .avatar-border {
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--cyber-border);
+      border-radius: var(--cyber-radius);
+      animation: rotateBorder 25s linear infinite;
+      transform-origin: center;
+      overflow: hidden;
+      background: rgba(0, 240, 255, 0.01);
+    }
+
+    .avatar-border::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 70px;
+      height: 70px;
+      border-top: 2px solid var(--cyber-neon-blue);
+      border-right: 2px solid var(--cyber-neon-blue);
+      border-radius: 0 var(--cyber-radius) 0 0;
+      transition: all var(--cyber-transition);
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+    }
+
+    .avatar-border::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: -2px;
+      width: 70px;
+      height: 70px;
+      border-bottom: 2px solid var(--cyber-neon-pink);
+      border-left: 2px solid var(--cyber-neon-pink);
+      border-radius: 0 0 0 var(--cyber-radius);
+      transition: all var(--cyber-transition);
+      box-shadow: 0 0 30px rgba(255, 45, 149, 0.1);
+    }
+
+    .avatar-frame:hover .avatar-border::before {
+      width: 100px;
+      height: 100px;
+      box-shadow: 0 0 50px rgba(0, 240, 255, 0.2);
+    }
+    .avatar-frame:hover .avatar-border::after {
+      width: 100px;
+      height: 100px;
+      box-shadow: 0 0 50px rgba(255, 45, 149, 0.2);
+    }
+
+    @keyframes rotateBorder {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .avatar-inner {
+      position: absolute;
+      inset: 18px;
+      background: var(--cyber-card);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(0, 240, 255, 0.03);
+    }
+
+    .avatar-inner .dev-svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 40px rgba(0, 240, 255, 0.02));
+    }
+
+    .floating-badge {
+      position: absolute;
+      background: rgba(5, 5, 5, 0.85);
+      color: var(--cyber-white);
+      padding: 0.4rem 1.2rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      border: 1px solid var(--cyber-border);
+      backdrop-filter: blur(12px);
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .badge-age {
+      bottom: -0.8rem;
+      right: -1.2rem;
+      border-color: var(--cyber-neon-blue);
+      color: var(--cyber-neon-blue);
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.05);
+    }
+
+    .badge-year {
+      top: -0.8rem;
+      left: -1.2rem;
+      border-color: var(--cyber-neon-pink);
+      color: var(--cyber-neon-pink);
+      box-shadow: 0 0 30px rgba(255, 45, 149, 0.05);
+    }
+
+    /* ============================================================
+       SCROLL HINT — CYBER
+       ============================================================ */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--cyber-gray);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      opacity: 0;
+      animation: fadeIn 1s 1.8s forwards;
+      z-index: 2;
+      font-family: 'Courier New', monospace;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 45px;
+      background: linear-gradient(to bottom, var(--cyber-neon-blue), transparent);
+      animation: scrollDown 1.8s ease-in-out infinite;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+    }
+
+    @keyframes scrollDown {
+      0% {
+        transform: scaleY(0);
+        transform-origin: top;
+      }
+      50% {
+        transform: scaleY(1);
+        transform-origin: top;
+      }
+      51% {
+        transform: scaleY(1);
+        transform-origin: bottom;
+      }
+      100% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+      }
+    }
+
+    /* ============================================================
+       SECTION COMMON — CYBER
+       ============================================================ */
+    section {
+      padding: 7rem 0;
+      position: relative;
+      border-top: 1px solid var(--cyber-border);
+    }
+
+    .section-label {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      color: var(--cyber-neon-blue);
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-shadow: 0 0 30px rgba(0, 240, 255, 0.05);
+    }
+
+    .section-label::before {
+      content: '//';
+      color: var(--cyber-neon-pink);
+      text-shadow: 0 0 30px rgba(255, 45, 149, 0.1);
+    }
+
+    .section-label::after {
+      content: '';
+      display: block;
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--cyber-neon-blue), transparent);
+    }
+
+    .section-title {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.08;
+      margin-bottom: 1rem;
+    }
+
+    .section-title .accent {
+      color: var(--cyber-neon-blue);
+      text-shadow: 0 0 40px rgba(0, 240, 255, 0.05);
+    }
+
+    .section-sub {
+      font-size: 0.95rem;
+      color: var(--cyber-gray);
+      font-weight: 300;
+      line-height: 1.9;
+      max-width: 520px;
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--cyber-neon-blue);
+      margin: 1.5rem 0 3rem;
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+    }
+
+    /* ============================================================
+       ABOUT — CYBER
+       ============================================================ */
+    #about {
+      background: var(--cyber-dark);
+      border-top: none;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+    }
+
+    .stat-cell {
+      background: var(--cyber-black);
+      padding: 2.2rem 1.8rem;
+      border: 1px solid var(--cyber-border);
+      transition: all var(--cyber-transition);
+    }
+
+    .stat-cell:hover {
+      border-color: var(--cyber-neon-blue);
+      background: rgba(0, 240, 255, 0.01);
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(0, 240, 255, 0.02);
+    }
+
+    .stat-num {
+      font-size: 2.6rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+      background: linear-gradient(135deg, var(--cyber-neon-blue), var(--cyber-neon-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 60px rgba(0, 240, 255, 0.05);
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      color: var(--cyber-gray);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       SKILLS — CYBER
+       ============================================================ */
+    #skills {
+      background: var(--cyber-black);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--cyber-border);
+      border: 1px solid var(--cyber-border);
+    }
+
+    .skill-card {
+      background: var(--cyber-black);
+      padding: 2.4rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: all var(--cyber-transition);
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      border-bottom: 1px solid transparent;
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 0;
+      background: linear-gradient(to top, rgba(0, 240, 255, 0.02), transparent);
+      transition: height 0.6s ease;
+    }
+
+    .skill-card:hover::before {
+      height: 100%;
+    }
+    .skill-card:hover {
+      border-color: rgba(0, 240, 255, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .skill-icon {
+      font-size: 2rem;
+      line-height: 1;
+      filter: grayscale(0.2);
+    }
+
+    .skill-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--cyber-white);
+    }
+
+    .skill-level-bar {
+      height: 2px;
+      background: rgba(0, 240, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+
+    .skill-level-fill {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, var(--cyber-neon-blue), var(--cyber-neon-pink));
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border-radius: 2px;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+    }
+
+    .skill-card.visible .skill-level-fill {
+      transform: scaleX(1);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.2rem;
+    }
+
+    .tag {
+      font-size: 0.55rem;
+      padding: 0.25rem 0.6rem;
+      border: 1px solid var(--cyber-border);
+      color: var(--cyber-gray);
+      letter-spacing: 0.06em;
+      border-radius: 2px;
+      transition: all var(--cyber-transition);
+      font-family: 'Courier New', monospace;
+      text-transform: uppercase;
+    }
+
+    .skill-card:hover .tag {
+      border-color: var(--cyber-neon-blue);
+      color: var(--cyber-neon-blue);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.02);
+    }
+
+    /* ============================================================
+       PROJECTS — CYBER
+       ============================================================ */
+    #projects {
+      background: var(--cyber-dark);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      border: 1px solid var(--cyber-border);
+      background: var(--cyber-black);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      transition: all var(--cyber-transition);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.01), transparent);
+      opacity: 0;
+      transition: opacity var(--cyber-transition);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-card:hover {
+      border-color: var(--cyber-neon-blue);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 240, 255, 0.02);
+    }
+
+    .project-card.featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      padding: 3rem;
+    }
+
+    .project-num {
+      font-size: 0.6rem;
+      color: var(--cyber-neon-blue);
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      font-family: 'Courier New', monospace;
+    }
+
+    .project-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--cyber-gray);
+      line-height: 1.9;
+      font-weight: 300;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: auto;
+    }
+
+    .project-tech .tag {
+      font-size: 0.5rem;
+    }
+
+    .project-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      opacity: 0.06;
+      align-self: center;
+      transition: all var(--cyber-transition);
+      filter: grayscale(0.5);
+    }
+
+    .project-card:hover .project-visual {
+      opacity: 0.12;
+      transform: scale(1.05);
+      filter: grayscale(0);
+    }
+
+    .project-arrow {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      font-size: 1.2rem;
+      color: var(--cyber-neon-blue);
+      opacity: 0;
+      transform: translate(-8px, 8px);
+      transition: all var(--cyber-transition);
+    }
+
+    .project-card:hover .project-arrow {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    /* ============================================================
+       CONTACT — CYBER
+       ============================================================ */
+    #contact {
+      background: var(--cyber-black);
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-big {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-big em {
+      font-style: normal;
+      color: var(--cyber-neon-blue);
+      text-shadow: 0 0 40px rgba(0, 240, 255, 0.05);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--cyber-border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 1.4rem 1.8rem;
+      border-bottom: 1px solid var(--cyber-border);
+      text-decoration: none;
+      color: var(--cyber-white);
+      transition: all var(--cyber-transition);
+    }
+
+    .contact-item:last-child {
+      border-bottom: none;
+    }
+
+    .contact-item:hover {
+      background: rgba(0, 240, 255, 0.02);
+      padding-right: 2.4rem;
+      border-color: var(--cyber-neon-blue);
+    }
+
+    .contact-icon {
+      font-size: 1.2rem;
+      width: 1.6rem;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .contact-label {
+      font-size: 0.6rem;
+      color: var(--cyber-gray);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-family: 'Courier New', monospace;
+    }
+
+    .contact-value {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--cyber-white);
+    }
+
+    .contact-item:hover .contact-value {
+      color: var(--cyber-neon-blue);
+    }
+
+    /* ============================================================
+       FOOTER — CYBER
+       ============================================================ */
+    footer {
+      padding: 2rem 2.5rem;
+      border-top: 1px solid var(--cyber-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      color: var(--cyber-gray);
+      background: var(--cyber-dark);
+      font-family: 'Courier New', monospace;
+    }
+
+    footer .social-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    footer .social-links a {
+      color: var(--cyber-gray);
+      text-decoration: none;
+      transition: all var(--cyber-transition);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+    }
+
+    footer .social-links a:hover {
+      color: var(--cyber-neon-blue);
+      text-shadow: 0 0 30px rgba(0, 240, 255, 0.05);
+    }
+
+    footer .footer-glow {
+      color: var(--cyber-neon-blue);
+      opacity: 0.3;
+    }
+
+    /* ============================================================
+       ANIMATIONS
+       ============================================================ */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 0.1s;
+    }
+    .reveal-delay-2 {
+      transition-delay: 0.2s;
+    }
+    .reveal-delay-3 {
+      transition-delay: 0.3s;
+    }
+    .reveal-delay-4 {
+      transition-delay: 0.4s;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 992px) {
+      #hero {
+        grid-template-columns: 1fr;
+        padding: 7rem 0 3rem;
+        gap: 3rem;
+        text-align: center;
+      }
+
+      .hero-desc {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-cta {
+        justify-content: center;
+      }
+
+      .hero-eyebrow {
+        justify-content: center;
+      }
+
+      .hero-eyebrow::after {
+        display: none;
+      }
+
+      .hero-visual {
+        display: none;
+      }
+
+      .about-grid,
+      .contact-wrap {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card.featured {
+        grid-column: auto;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      section {
+        padding: 5rem 0;
+      }
+
+      .container {
+        padding: 0 20px;
+      }
+
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        background: rgba(5, 5, 5, 0.98);
+        padding: 1.5rem 2rem;
+        gap: 1.2rem;
+        border-bottom: 1px solid var(--cyber-border);
+        backdrop-filter: blur(20px);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .project-card {
+        padding: 1.8rem;
+      }
+      .project-card.featured {
+        padding: 1.8rem;
+      }
+
+      .floating-badge {
+        display: none;
+      }
+
+      .avatar-frame {
+        width: 280px;
+        height: 340px;
+      }
+
+      .hero-name {
+        font-size: 2.4rem;
+      }
+
+      .contact-wrap {
+        gap: 2rem;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        padding: 1.5rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+  GLOW ORBS — CYBER
+  ============================================================ -->
+  <div class="glow-orb glow-orb--1" aria-hidden="true"></div>
+  <div class="glow-orb glow-orb--2" aria-hidden="true"></div>
+  <div class="glow-orb glow-orb--3" aria-hidden="true"></div>
+
+  <!-- ============================================================
+  NAV — CYBER
+  ============================================================ -->
+  <nav id="navbar" role="navigation" aria-label="ناوبری اصلی">
+    <a href="#hero" class="nav-logo">&lt;ابوالفضل <span>احمدی</span>/&gt;</a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="منو" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks" role="menubar">
+      <li role="none"><a href="#about" role="menuitem">درباره</a></li>
+      <li role="none"><a href="#skills" role="menuitem">مهارت‌ها</a></li>
+      <li role="none"><a href="#projects" role="menuitem">پروژه‌ها</a></li>
+      <li role="none"><a href="#contact" role="menuitem">تماس</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============================================================
+  HERO — CYBER
+  ============================================================ -->
+  <section id="hero">
+    <div class="hero-bg-grid" aria-hidden="true"></div>
+
+    <div class="container" style="display:contents;">
+      <div class="hero-text">
+        <p class="hero-eyebrow">دانشجوی مهندسی نرم‌افزار</p>
+
+        <h1 class="hero-name">
+          <span class="highlight">ابوالفضل احمدی</span>
+          <span class="subtitle"> Software Engineering Student · ۱۴۰۵</span>
+        </h1>
+
+        <p class="hero-desc">
+          ساخت تجربه‌های دیجیتال تمیز، کارآمد و <span class="glow-text">هدفمند</span> — از ایده تا اجرا.
+          علاقه‌مند به توسعه نرم‌افزار، طراحی سیستم و <span class="glow-text">یادگیری مداوم</span>.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#projects" class="btn-primary">مشاهده پروژه‌ها</a>
+          <a href="#contact" class="btn-secondary">ارتباط با من</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="avatar-frame">
+          <div class="avatar-border"></div>
+          <div class="avatar-inner">
+            <svg class="dev-svg" viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="screenGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.08"/>
+                  <stop offset="100%" stop-color="#00f0ff" stop-opacity="0.01"/>
+                </linearGradient>
+                <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#2a2a2a"/>
+                  <stop offset="100%" stop-color="#1a1a1a"/>
+                </linearGradient>
+              </defs>
+              <ellipse cx="150" cy="200" rx="140" ry="170" fill="rgba(0,240,255,0.01)"/>
+              <rect x="30" y="280" width="240" height="8" rx="2" fill="#2a2a2a"/>
+              <rect x="60" y="288" width="8" height="60" fill="#1e1e1e"/>
+              <rect x="232" y="288" width="8" height="60" fill="#1e1e1e"/>
+              <rect x="138" y="265" width="24" height="18" rx="1" fill="#222"/>
+              <rect x="120" y="280" width="60" height="4" rx="1" fill="#1a1a1a"/>
+              <rect x="55" y="130" width="190" height="140" rx="6" fill="#0a0a0a" stroke="rgba(0,240,255,0.05)" stroke-width="1"/>
+              <rect x="58" y="133" width="184" height="134" rx="4" fill="url(#screenGlow)" stroke="rgba(0,240,255,0.03)" stroke-width="1"/>
+              <g opacity="0.7">
+                <rect x="72" y="148" width="60" height="3" rx="1" fill="#666"/>
+                <rect x="80" y="157" width="40" height="3" rx="1" fill="#444"/>
+                <rect x="80" y="166" width="70" height="3" rx="1" fill="#555"/>
+                <rect x="88" y="175" width="50" height="3" rx="1" fill="#444"/>
+                <rect x="88" y="184" width="35" height="3" rx="1" fill="#666"/>
+                <rect x="80" y="193" width="55" height="3" rx="1" fill="#444"/>
+                <rect x="72" y="202" width="65" height="3" rx="1" fill="#555"/>
+                <rect x="68" y="212" width="164" height="10" rx="1" fill="rgba(0,240,255,0.03)"/>
+                <rect x="80" y="215" width="90" height="4" rx="1" fill="#00f0ff" opacity="0.6"/>
+                <rect x="174" y="215" width="2" height="10" rx="0.5" fill="#00f0ff" opacity="0.8">
+                  <animate attributeName="opacity" values="0.8;0;0.8" dur="1s" repeatCount="indefinite"/>
+                </rect>
+                <rect x="140" y="230" width="45" height="3" rx="1" fill="#555"/>
+                <rect x="148" y="239" width="30" height="3" rx="1" fill="#444"/>
+                <rect x="140" y="248" width="60" height="3" rx="1" fill="#555"/>
+              </g>
+              <ellipse cx="150" cy="315" rx="45" ry="55" fill="url(#bodyGrad)"/>
+              <ellipse cx="150" cy="310" rx="35" ry="45" fill="#1e1e1e"/>
+              <path d="M105 295 Q85 310 90 330" stroke="#2a2a2a" stroke-width="22" stroke-linecap="round" fill="none"/>
+              <path d="M195 295 Q215 310 210 330" stroke="#2a2a2a" stroke-width="22" stroke-linecap="round" fill="none"/>
+              <ellipse cx="95" cy="335" rx="14" ry="9" fill="#333"/>
+              <ellipse cx="205" cy="335" rx="14" ry="9" fill="#333"/>
+              <rect x="75" y="278" width="150" height="12" rx="2" fill="#1a1a1a" stroke="rgba(0,240,255,0.03)" stroke-width="1"/>
+              <g fill="rgba(0,240,255,0.1)">
+                <rect x="80" y="281" width="10" height="6" rx="1"/>
+                <rect x="93" y="281" width="10" height="6" rx="1"/>
+                <rect x="106" y="281" width="10" height="6" rx="1"/>
+                <rect x="119" y="281" width="10" height="6" rx="1"/>
+                <rect x="132" y="281" width="10" height="6" rx="1"/>
+                <rect x="145" y="281" width="10" height="6" rx="1"/>
+                <rect x="158" y="281" width="10" height="6" rx="1"/>
+                <rect x="171" y="281" width="10" height="6" rx="1"/>
+                <rect x="184" y="281" width="20" height="6" rx="1"/>
+              </g>
+              <rect x="140" y="255" width="20" height="22" rx="4" fill="#2e2e2e"/>
+              <ellipse cx="150" cy="240" rx="32" ry="36" fill="#2e2e2e"/>
+              <ellipse cx="139" cy="234" rx="4" ry="4.5" fill="#1a1a1a"/>
+              <ellipse cx="161" cy="234" rx="4" ry="4.5" fill="#1a1a1a"/>
+              <rect x="131" y="230" width="16" height="11" rx="3" fill="none" stroke="rgba(0,240,255,0.2)" stroke-width="1.5"/>
+              <rect x="153" y="230" width="16" height="11" rx="3" fill="none" stroke="rgba(0,240,255,0.2)" stroke-width="1.5"/>
+              <line x1="147" y1="235" x2="153" y2="235" stroke="rgba(0,240,255,0.15)" stroke-width="1.2"/>
+              <line x1="131" y1="235" x2="126" y2="234" stroke="rgba(0,240,255,0.1)" stroke-width="1.2"/>
+              <line x1="169" y1="235" x2="174" y2="234" stroke="rgba(0,240,255,0.1)" stroke-width="1.2"/>
+              <path d="M143 248 Q150 253 157 248" stroke="rgba(0,240,255,0.2)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <path d="M118 230 Q120 205 150 204 Q180 205 182 230 Q175 215 150 214 Q125 215 118 230Z" fill="#1a1a1a"/>
+              <rect x="220" y="263" width="18" height="20" rx="2" fill="#1a1a1a" stroke="rgba(0,240,255,0.05)" stroke-width="1"/>
+              <path d="M238 270 Q245 270 245 277 Q245 284 238 283" stroke="rgba(0,240,255,0.05)" stroke-width="1.5" fill="none"/>
+              <path d="M226 260 Q228 255 226 250" stroke="rgba(0,240,255,0.06)" stroke-width="1.5" fill="none" stroke-linecap="round">
+                <animate attributeName="d" values="M226 260 Q228 255 226 250;M226 260 Q224 255 226 250;M226 260 Q228 255 226 250" dur="2s" repeatCount="indefinite"/>
+              </path>
+              <path d="M230 260 Q232 254 230 248" stroke="rgba(255,45,149,0.05)" stroke-width="1.5" fill="none" stroke-linecap="round">
+                <animate attributeName="d" values="M230 260 Q232 254 230 248;M230 260 Q228 254 230 248;M230 260 Q232 254 230 248" dur="2.5s" repeatCount="indefinite"/>
+              </path>
+              <g opacity="0.08" font-family="Courier New" font-size="11" fill="#00f0ff">
+                <text x="20" y="80">{'}'}</text>
+                <text x="240" y="100">&lt;/&gt;</text>
+                <text x="15" y="180">( )</text>
+                <text x="255" y="200">[ ]</text>
+                <text x="30" y="120">const</text>
+                <text x="230" y="150">new</text>
+                <text x="10" y="240">return</text>
+                <text x="260" y="260">async</text>
+              </g>
+            </svg>
+          </div>
+          <div class="floating-badge badge-age">0x14 // ۲۰</div>
+          <div class="floating-badge badge-year">0x583 // ۱۴۰۳</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>// اسکرول</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+  ABOUT — CYBER
+  ============================================================ -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="reveal">
+          <p class="section-label">درباره من</p>
+          <h2 class="section-title">کد می‌نویسم،<br>مسئله <span class="accent">حل</span> می‌کنم.</h2>
+          <div class="divider"></div>
+          <p class="section-sub">
+            دانشجوی مهندسی نرم‌افزار هستم که با اشتیاق به ساخت نرم‌افزارهای کاربردی
+            و یادگیری فناوری‌های نو می‌پردازم. برایم مهمه که کدی بنویسم که هم کار کنه،
+            هم خوانا باشه و هم نگه‌داری‌اش آسون باشه.
+
+
+  <!-- ============================================================
+  SKILLS — CYBER
+  ============================================================ -->
+  <section id="skills">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">تخصص‌ها</p>
+        <h2 class="section-title">مهارت‌های <span class="accent">برنامه نویسی</span></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <div class="skill-icon">🐍</div>
+          <div class="skill-name">Python</div>
+          <div class="skill-level-bar">
+            <div class="skill-level-fill" style="width:85%"></div>
+          </div>
+          <div class="skill-tags">
+            <span class="tag">OOP</span>
+            <span class="tag">Data Structures</span>
+            <span class="tag">Algorithms</span>
+          </div>
+        </div>
+        <div class="skill-card reveal reveal-delay-1">
+          <div class="skill-icon">🌐</div>
+          <div class="skill-name">توسعه وب</div>
+          <div class="skill-level-bar">
+            <div class="skill-level-fill" style="width:75%"></div>
+          </div>
+          <div class="skill-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+        <div class="skill-card reveal reveal-delay-2">
+          <div class="skill-icon">⚙️</div>
+          <div class="skill-name">طراحی سیستم</div>
+          <div class="skill-level-bar">
+            <div class="skill-level-fill" style="width:65%"></div>
+          </div>
+          <div class="skill-tags">
+            <span class="tag">UML</span>
+            <span class="tag">Architecture</span>
+            <span class="tag">Patterns</span>
+          </div>
+        </div>
+        <div class="skill-card reveal reveal-delay-1">
+          <div class="skill-icon">🗄️</div>
+          <div class="skill-name">پایگاه داده</div>
+          <div class="skill-level-bar">
+            <div class="skill-level-fill" style="width:70%"></div>
+          </div>
+          <div class="skill-tags">
+            <span class="tag">SQL</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">SQLite</span>
+          </div>
+        </div>
+        <div class="skill-card reveal reveal-delay-2">
+          <div class="skill-icon">🔧</div>
+          <div class="skill-name">ابزارها</div>
+          <div class="skill-level-bar">
+            <div class="skill-level-fill" style="width:80%"></div>
+          </div>
+          <div class="skill-tags">
+            <span class="tag">Git</span>
+            <span class="tag">GitHub</span>
+            <span class="tag">VS Code</span>
+          </div>
+        </div>
+        <div class="skill-card reveal reveal-delay-3">
+          <div class="skill-icon">📱</div>
+          <div class="skill-name">برنامه‌نویسی موبایل</div>
+          <div class="skill-level-bar">
+            <div class="skill-level-fill" style="width:55%"></div>
+          </div>
+          <div class="skill-tags">
+            <span class="tag">در حال یادگیری</span>
+            <span class="tag">Flutter</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+  PROJECTS — CYBER
+  ============================================================ -->
+  <section id="projects">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">کارها</p>
+        <h2 class="section-title">پروژه‌های <span class="accent">برنامه نویسی</span></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card featured reveal">
+          <div>
+            <p class="project-num">[۰۱] — پروژه اصلی</p>
+            <h3 class="project-title">سیستم مدیریت دانشجویی</h3>
+            <p class="project-desc">
+              یک سیستم کامل برای مدیریت اطلاعات دانشجویان، دروس و نمرات. طراحی شده با
+              معماری لایه‌ای و پایگاه داده رابطه‌ای. پروژه دانشگاهی با تمرکز بر اصول
+              مهندسی نرم‌افزار و الگوهای طراحی.
+            </p>
+            <div class="project-tech">
+              <span class="tag">Python</span>
+              <span class="tag">SQLite</span>
+              <span class="tag">OOP</span>
+              <span class="tag">Design Patterns</span>
+            </div>
+          </div>
+          <div class="project-visual">🎓</div>
+          <div class="project-arrow">↗</div>
+        </div>
+
+        <div class="project-card reveal reveal-delay-1">
+          <p class="project-num">[۰۲]</p>
+          <h3 class="project-title">وب‌سایت نمونه کار</h3>
+          <p class="project-desc">همین سایتی که الان دارید می‌بینید — طراحی مینیمال با HTML, CSS و JavaScript خالص.</p>
+          <div class="project-tech">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JS</span>
+          </div>
+          <div class="project-arrow">↗</div>
+        </div>
+
+        <div class="project-card reveal reveal-delay-2">
+          <p class="project-num">[۰۳]</p>
+          <h3 class="project-title">ربات تلگرام</h3>
+          <p class="project-desc">ربات اتوماسیون ساده با Python برای انجام کارهای روزمره و پاسخ خودکار.</p>
+          <div class="project-tech">
+            <span class="tag">Python</span>
+            <span class="tag">Telegram API</span>
+            <span class="tag">Automation</span>
+          </div>
+          <div class="project-arrow">↗</div>
+        </div>
+
+        <div class="project-card reveal reveal-delay-3">
+          <p class="project-num">[۰۴]</p>
+          <h3 class="project-title">الگوریتم‌های داده‌ساختار</h3>
+          <p class="project-desc">پیاده‌سازی انواع ساختارهای داده و الگوریتم‌های مرتب‌سازی و جستجو در Python.</p>
+          <div class="project-tech">
+            <span class="tag">Python</span>
+            <span class="tag">Algorithms</span>
+            <span class="tag">DSA</span>
+          </div>
+          <div class="project-arrow">↗</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+  CONTACT — CYBER
+  ============================================================ -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-wrap">
+        <div class="reveal">
+          <p class="section-label">ارتباط</p>
+          <div class="contact-big">
+            بیا با هم<br><em>یه چیز باحال</em><br>بسازیم.
+          </div>
+          <p class="section-sub">
+            برای همکاری در پروژه، پیشنهاد کار، یا فقط یه سلام ساده — خوشحال می‌شم بشنوم.
+          </p>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <div class="contact-links">
+            <a href="mailto:abolfazlgg747@gmail.com" class="contact-item" target="_blank" rel="noopener">
+              <span class="contact-icon">✉️</span>
+              <div>
+                <div class="contact-label">ایمیل</div>
+                <div class="contact-value">abolfazlgg747@gmail.com</div>
+              </div>
+            </a>
+            <a href="tel:09913373469" class="contact-item">
+              <span class="contact-icon">📞</span>
+              <div>
+                <div class="contact-label">تلفن</div>
+                <div class="contact-value" style="direction:ltr;text-align:right">09913373469</div>
+              </div>
+            </a>
+            <a href="https://t.me/Ahmadi_abolfazl7" class="contact-item" target="_blank" rel="noopener">
+              <span class="contact-icon">✈️</span>
+              <div>
+                <div class="contact-label">تلگرام</div>
+                <div class="contact-value">@Ahmadi_abolfazl7</div>
+              </div>
+            </a>
+            <a href="https://instagram.com/abolfazl._ahmadi7" class="contact-item" target="_blank" rel="noopener">
+              <span class="contact-icon">📸</span>
+              <div>
+                <div class="contact-label">اینستاگرام</div>
+                <div class="contact-value">abolfazl._ahmadi7</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+  FOOTER — CYBER
+  ============================================================ -->
+  <footer>
+    <span>© ۱۴۰۵ — ابوالفضل احمدی</span>
+    <div class="social-links">
+      <a href="https://t.me/Ahmadi_abolfazl7" target="_blank" rel="noopener">تلگرام</a>
+      <a href="https://instagram.com/abolfazl._ahmadi7" target="_blank" rel="noopener">اینستاگرام</a>
+      <a href="mailto:abolfazlgg747@gmail.com">ایمیل</a>
+    </div>
+    <span class="footer-glow">// دانشجوی مهندسی نرم‌افزار</span>
+  </footer>
+
+  <!-- ============================================================
+  JAVASCRIPT — CYBER ENHANCED
+  ============================================================ -->
+  <script>
+    (function() {
+      'use strict';
+
+      // ============================================================
+      // 1. NAV TOGGLE (Mobile)
+      // ============================================================
+      const navToggle = document.getElementById('navToggle');
+      const navLinks = document.getElementById('navLinks');
+
+      if (navToggle && navLinks) {
+        navToggle.addEventListener('click', function() {
+          const isOpen = navLinks.classList.toggle('open');
+          this.classList.toggle('active');
+          this.setAttribute('aria-expanded', isOpen);
+        });
+      }
+
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('open');
+          navToggle.classList.remove('active');
+          navToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // ============================================================
+      // 2. NAV SCROLL EFFECT
+      // ============================================================
+      const navbar = document.getElementById('navbar');
+
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // ============================================================
+      // 3. INTERSECTION OBSERVER — Reveal Animations
+      // ============================================================
+      const reveals = document.querySelectorAll('.reveal, .skill-card');
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      reveals.forEach(el => revealObserver.observe(el));
+
+      // ============================================================
+      // 4. ACTIVE NAV LINK (scroll spy)
+      // ============================================================
+      const sections = document.querySelectorAll('section[id]');
+      const navLinkItems = document.querySelectorAll('.nav-links a');
+
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navLinkItems.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === '#' + entry.target.id) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }, {
+        threshold: 0.35
+      });
+
+      sections.forEach(s => sectionObserver.observe(s));
+
+      // ============================================================
+      // 5. PARALLAX GLOW (Hero) — Cyber enhanced
+      // ============================================================
+      const glowOrbs = document.querySelectorAll('.glow-orb');
+
+      window.addEventListener('mousemove', function(e) {
+        const x = (e.clientX / window.innerWidth - 0.5) * 30;
+        const y = (e.clientY / window.innerHeight - 0.5) * 30;
+
+        glowOrbs.forEach((orb, index) => {
+          const speed = 1 + index * 0.35;
+          orb.style.transform =
+            `translate(${x * speed * 0.4}px, ${y * speed * 0.4}px) scale(${1 + (Math.abs(x) + Math.abs(y)) * 0.0006})`;
+        });
+      });
+
+      // ============================================================
+      // 6. SKILL CARD HOVER — Cyber interactive
+      // ============================================================
+      document.querySelectorAll('.skill-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          const fill = this.querySelector('.skill-level-fill');
+          if (fill) {
+            const currentWidth = parseFloat(fill.style.width) || 50;
+            fill.style.width = Math.min(currentWidth + 8, 100) + '%';
+            fill.style.boxShadow = '0 0 40px rgba(0, 240, 255, 0.15)';
+          }
+        });
+        card.addEventListener('mouseleave', function() {
+          const fill = this.querySelector('.skill-level-fill');
+          if (fill) {
+            const originalWidth = this.dataset.originalWidth || 50;
+            fill.style.width = originalWidth + '%';
+            fill.style.boxShadow = '0 0 20px rgba(0, 240, 255, 0.05)';
+          }
+        });
+        const fill = card.querySelector('.skill-level-fill');
+        if (fill) {
+          const w = parseFloat(fill.style.width) || 50;
+          card.dataset.originalWidth = w;
+        }
+      });
+
+      // ============================================================
+      // 7. KEYBOARD ACCESSIBILITY
+      // ============================================================
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          if (navLinks.classList.contains('open')) {
+            navLinks.classList.remove('open');
+            navToggle.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+          }
+        }
+      });
+
+      // ============================================================
+      // 8. MATRIX RAIN EFFECT (subtle on hero)
+      // ============================================================
+      const heroText = document.querySelector('.hero-desc .glow-text');
+      let matrixInterval;
+
+      function startMatrixEffect() {
+        const chars = '01アイウエオカキクケコサシスセソタチツテト';
+        let count = 0;
+
+        if (matrixInterval) clearInterval(matrixInterval);
+
+        matrixInterval = setInterval(() => {
+          if (!heroText) return;
+          const original = heroText.textContent;
+          if (count < 3) {
+            let newText = '';
+            for (let i = 0; i < original.length; i++) {
+              if (Math.random() > 0.3) {
+                newText += chars[Math.floor(Math.random() * chars.length)];
+              } else {
+                newText += original[i];
+              }
+            }
+            heroText.textContent = newText;
+            count++;
+          } else {
+            heroText.textContent = original;
+            clearInterval(matrixInterval);
+          }
+        }, 80);
+      }
+
+      // Trigger on hover
+      if (heroText) {
+        heroText.addEventListener('mouseenter', startMatrixEffect);
+        heroText.addEventListener('mouseleave', () => {
+          if (matrixInterval) {
+            clearInterval(matrixInterval);
+            matrixInterval = null;
+          }
+        });
+      }
+
+      // ============================================================
+      // 9. CONSOLE BRANDING — Cyber style
+      // ============================================================
+      console.log('%c┌─────────────────────────────────┐', 'color: #00f0ff;');
+      console.log('%c│  🚀 ابوالفضل احمدی              │', 'color: #00f0ff;');
+      console.log('%c│  مهندس نرم‌افزار ·    │', 'color: #ff2d95;');
+      console.log('%c│  ورودی ۱۴۰۳ · ۲۰ ساله          │', 'color: #b300ff;');
+      console.log('%c└─────────────────────────────────┘', 'color: #00f0ff;');
+      console.log('%c⚡ ساخته شده با کد تمیز و عشق به فناوری', 'color: #888;');
+
+    })();
+  </script>
+
+</body>
+</html>
